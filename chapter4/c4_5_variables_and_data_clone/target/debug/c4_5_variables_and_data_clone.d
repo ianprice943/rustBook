@@ -1,1 +1,0 @@
-/home/ianprice943/projects/rust/rustBook/chapter4/c4_5_variables_and_data_clone/target/debug/c4_5_variables_and_data_clone: /home/ianprice943/projects/rust/rustBook/chapter4/c4_5_variables_and_data_clone/src/main.rs
