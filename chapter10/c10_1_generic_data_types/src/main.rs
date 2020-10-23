@@ -65,6 +65,17 @@ fn main() {
 
     let p3 = p1.mixup(p2);
     println!("p3.x = {}, p3.y = {}", p3.x, p3.y);
+
+    let number_list_traits = vec![34, 50, 25, 100, 65];
+
+    let result = largest(&number_list_traits);
+    println!("The largest number is {}", result);
+
+    let char_list_traits = vec!['y', 'm', 'a', 'q'];
+
+    let result = largest(&char_list_traits);
+    println!("The largest char is {}", result);
+
 }
 
 fn largest_i32(list: &[i32]) -> &i32 {
@@ -92,8 +103,8 @@ fn largest_char(list: &[char]) -> &char {
 }
 
 // the two above work, but they have the same inner code. We can replace these two functions
-// with a single generic function
-/*
+// with a single generic function (so long as traits are implemented)
+/* // before trait implementation
 fn largest<T>(list: &[T]) -> &T {
     let mut largest = list[0];
 
@@ -106,3 +117,17 @@ fn largest<T>(list: &[T]) -> &T {
     largest
 }
 */
+
+// after trait implementation. Note that Copy must also be brought into scope to
+// ensure that largest can be assigned a value from list
+fn largest<T: PartialOrd + Copy>(list: &[T]) ->  T {
+    let mut largest = list[0];
+
+    for &item in list {
+        if item > largest {
+            largest = item;
+        }
+    }
+
+    largest
+}
