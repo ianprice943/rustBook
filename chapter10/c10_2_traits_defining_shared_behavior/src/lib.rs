@@ -124,3 +124,29 @@ fn returns_summarizable_switch(switch: bool) -> impl Summary {
     }
 }
 
+// use trait bonds to conditionally implement methods
+
+use std::fmt::Display;
+
+struct Pair<T> {
+    x: T,
+    y: T,
+}
+
+// all versions of Pair will be able to call new()
+impl<T> Pair<T> {
+    fn new(x: T, y: T) -> Self {
+        Self { x, y }
+    }
+}
+
+// however, only Pairs which implement Display and PartialOrd can call cmp_display()
+impl<T: Display + PartialOrd> Pair<T> {
+    fn cmp_display(&self) {
+        if self.x >= self.y {
+            println!("The largest member is x = {}", self.x);
+        } else {
+            println!("The largest member is y = {}", self.y);
+        }
+    }
+}
